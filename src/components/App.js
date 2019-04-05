@@ -1,28 +1,48 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import { handleInitialData }  from '../actions/shared'
-import Dashboard from './Dashboard';
-import NewQuestion from './NewQuestion'
+import Login from './Login';
 
 class App extends Component {
   componentDidMount(){
-    this.props.dispatch(handleInitialData())
+    this.props.handleInitialData()
   }
   render() {
+    const { notLoggedIn } = this.props;
+
     return (
-      <div>
-        {this.props.loading === true
-          ? null 
-          : <NewQuestion/>}
-      </div>
-    )
+      <Router>
+        <Fragment>
+          <div className="main-container">
+            <Login notLoggedIn={notLoggedIn}/>
+          </div>
+        </Fragment>
+      </Router>
+    );
   }
 }
+
+App.propTypes = {
+  handleInitialData : PropTypes.func.isRequired,
+  notLoggedIn: PropTypes.bool.isRequired
+};
 
 function mapStateToProps ({ authedUser }) {
   return {
-    loading: authedUser === null
+    notLoggedIn: authedUser === null
   }
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => {
+      dispatch(handleInitialData())
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
