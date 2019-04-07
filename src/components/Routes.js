@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
 
+import Dashboard from './Dashboard'
 import Login from "./Login";
 import NewQuestion from "./NewQuestion";
 
@@ -11,6 +12,7 @@ function Routes(props) {
       {
         props.notLoggedIn ? <Route path='/' exact component={Login}/> :
           <Fragment>
+            <Route path='/' exact component={Dashboard} />
             <Route path='/add' component={NewQuestion}/>
           </Fragment>
       }
