@@ -1,6 +1,7 @@
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import { Link , withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import {unsetAuthedUser} from "../actions/authedUser";
 import {connect} from "react-redux";
 import React, { PureComponent, Fragment } from "react";
 import User from "./User"
@@ -14,6 +15,11 @@ class NavBar extends PureComponent {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  };
+
+  logout = (e) => {
+    const { logout} = this.props;
+    logout()
   };
 
   render() {
@@ -33,6 +39,9 @@ class NavBar extends PureComponent {
                 </NavItem>
                 <NavItem>
                   <User id={authedUser}/>
+                </NavItem>
+                <NavItem>
+                  <NavLink onClick={this.logout}>Logout</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
@@ -54,4 +63,12 @@ function mapStateToProps ({ authedUser }) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(NavBar))
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => {
+      dispatch(unsetAuthedUser())
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
