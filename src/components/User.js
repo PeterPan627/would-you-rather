@@ -15,7 +15,7 @@ class User extends PureComponent {
 
 User.propTypes = {
   user: PropTypes.object.isRequired
-}
+};
 
 function mapStateToProps ({ users }, { id }) {
   return {

@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import Question from './Question';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 
-export default class DashBoard extends PureComponent {
+class DashBoard extends PureComponent {
   state = {
     activeTab: '1'
   };
@@ -16,6 +18,7 @@ export default class DashBoard extends PureComponent {
   }
 
   render() {
+    const { unansweredQuestions, answeredQuestions } = this.props;
     return (
       <div>
         <Nav tabs>
@@ -39,11 +42,36 @@ export default class DashBoard extends PureComponent {
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
+            <Row>
+              {unansweredQuestions.map(qid =>
+                <Col key={qid} sm="6" md="4">
+                  <Question id={qid}/>
+                </Col>
+              )}
+            </Row>
           </TabPane>
           <TabPane tabId="2">
+            <Row>
+              {answeredQuestions.map(qid =>
+                <Col key={qid} sm="6" md="4">
+                  <Question id={qid}/>
+                </Col>
+              )}
+            </Row>
           </TabPane>
         </TabContent>
       </div>
     );
   }
 }
+
+function mapStateToProps ({ questions, users, authedUser }) {
+  const user = users[authedUser];
+  const answeredQuestions = Object.keys(user.answers);
+  return {
+    unansweredQuestions : Object.keys(questions).filter(qid => !answeredQuestions.includes(qid)),
+    answeredQuestions
+  }
+}
+
+export default connect(mapStateToProps)(DashBoard)
