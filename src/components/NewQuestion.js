@@ -14,11 +14,13 @@ import {
     Row,
 } from 'reactstrap';
 import { handleAddQuestion } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
     state = {
         optionOne: '',
-        optionTwo: ''
+        optionTwo: '',
+        redirect: false
     };
 
     handleOptionOneChange = (event) => {
@@ -39,9 +41,13 @@ class NewQuestion extends Component {
         event.preventDefault();
         const { optionOne, optionTwo } = this.state;
         this.props.addQuestion(optionOne, optionTwo);
+        this.setState({ redirect: true })
     };
 
     render() {
+        if (this.state.redirect) {
+          return <Redirect to='/' />
+        }
         const { optionOne, optionTwo } = this.state;
         return (
             <Row>
