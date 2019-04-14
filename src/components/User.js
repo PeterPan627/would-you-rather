@@ -7,6 +7,7 @@ class User extends PureComponent {
     const { user } = this.props;
     return (
       <Fragment>
+        <img src={user.avatarURL} className='avatar' alt={`Avatar of ${user.name}`}/>
         <span>{user.name}</span>
       </Fragment>
     );
