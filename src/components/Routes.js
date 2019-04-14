@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
 
 import Dashboard from './Dashboard'
+import LeaderBoard from './LeaderBoard'
 import Login from "./Login";
 import NewQuestion from "./NewQuestion";
 import Question from "./Question"
@@ -14,6 +15,7 @@ function Routes(props) {
         props.notLoggedIn ? <Route path='/' exact component={Login}/> :
           <Fragment>
             <Route path='/' exact component={Dashboard} />
+            <Route path='/leaderboard' exact component={LeaderBoard} />
             <Route path='/add' component={NewQuestion}/>
             <Route path="/questions/:id" component={Question} />
           </Fragment>
