@@ -1,7 +1,7 @@
 import { getInitialData } from '../utils/api'
 import { addUserQuestion, saveUserAnswer, receiveUsers } from '../actions/users'
-import { addQuestion, receiveQuestions } from '../actions/questions'
-import { saveQuestion, saveQuestionAnswer } from '../utils/api'
+import { addQuestion, receiveQuestions, saveQuestionAnswer } from '../actions/questions'
+import { _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA'
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -16,7 +16,7 @@ export function handleInitialData() {
 export function handleAddQuestion (optionOneText, optionTwoText){
     return (dispatch, getState) => {
         const { authedUser } = getState();
-        return saveQuestion({
+        return _saveQuestion({
             optionOneText,
             optionTwoText,
             author: authedUser
@@ -29,16 +29,18 @@ export function handleAddQuestion (optionOneText, optionTwoText){
     }
 }
 
-export function handleAnswer (auth, qid, option) {
-    const info = {
-      authedUser: auth,
-      qid,
-      answer: option
-    };
-    return (dispatch) => {
-        saveQuestionAnswer(info)
+export function handleAnswer (qid, option) {
+    return (dispatch, getState) => {
+      const { authedUser } = getState();
+      const info = {
+        authedUser: authedUser,
+        qid,
+        answer: option
+      };
+      _saveQuestionAnswer(info)
           .then(() => {
-              dispatch(saveUserAnswer(auth, qid, option))
+              dispatch(saveQuestionAnswer(authedUser, qid, option));
+              dispatch(saveUserAnswer(authedUser, qid, option))
           })
     }
 }

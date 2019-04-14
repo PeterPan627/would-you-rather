@@ -1,40 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, CardTitle} from 'reactstrap';
-import { withRouter } from 'react-router-dom';
-import { handleAnswer } from '../actions/shared';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+import {  withRouter } from 'react-router-dom';
 
 class Question extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      answer: this.props.answer
-    };
-    this.changeOption = this.changeOption.bind(this)
+  constuctor() {
+    this.loadQuestionDetails = this.routeChange.bind(this);
   }
-
-  changeOption(opt) {
-    const {dispatch, auth, question} = this.props;
-    if (!this.state.answer) {
-      if (opt === 1) {
-        dispatch(handleAnswer(auth, question.id, 'optionOne'));
-        this.setState({answer: 'optionOne'})
-      } else if (opt === 2) {
-        dispatch(handleAnswer(auth, question.id, 'optionTwo'));
-        this.setState({answer: 'optionTwo'})
-      }
-    }
+  loadQuestionDetails(e, questionId) {
+    let path = `/questions/`+questionId;
+    this.props.history.push(path);
   }
-
   render() {
     const {question} = this.props;
     return (
-      <Card>
+      <Card onClick={(e) => this.loadQuestionDetails(e, question.id)}>
         <CardBody>
           <CardTitle>Would You Rather</CardTitle>
           <ul>
-            <li onClick={() => this.changeOption(1)}>{question.optionOne.text}</li>
-            <li onClick={() => this.changeOption(2)}>{question.optionTwo.text}</li>
+            <li>{question.optionOne.text}</li>
+            <li>{question.optionTwo.text}</li>
           </ul>
         </CardBody>
       </Card>
