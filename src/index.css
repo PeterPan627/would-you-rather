@@ -176,3 +176,32 @@ div.card {
   display: flex;
   flex-direction: column;
 }
+
+.progress {
+  margin-top: 25px;
+  width: 100%;
+  background: #000;
+  height: 25px;
+  display: inline-flex;
+  color: #E8F1E8;
+  font-size: 20px;
+}
+
+.progress-one {
+  height: 100%;
+  background: #808CFA;
+  text-align: center;
+}
+
+.progress-two {
+  height: 100%;
+  background: #FA8080;
+  text-align: center;
+}
+
+.total {
+  margin-top: 25px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+}
