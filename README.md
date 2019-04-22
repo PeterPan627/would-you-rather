@@ -8,7 +8,7 @@ This app was built as a  project for the Udacity React Nanodegree Program. The p
 
 In the project directory, you can run:
 
-### `npm install --no-optional`
+### `npm install`
 
 Runs this to install all the project dependencies
 
