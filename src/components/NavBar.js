@@ -1,7 +1,6 @@
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import { Link , withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
-import {unsetAuthedUser} from "../actions/authedUser";
 import {connect} from "react-redux";
 import React, { PureComponent, Fragment } from "react";
 import User from "./User";
@@ -61,12 +60,4 @@ function mapStateToProps ({ authedUser }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    logout: () => {
-      dispatch(unsetAuthedUser())
-    }
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
+export default withRouter(connect(mapStateToProps, null)(NavBar))

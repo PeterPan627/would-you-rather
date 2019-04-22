@@ -3,6 +3,7 @@ import { Card, CardHeader,CardBody, CardTitle, FormGroup, Label, Input, Form, Bu
 import { connect } from 'react-redux';
 import User from './User';
 import { handleAnswer } from '../actions/shared';
+import PropTypes from 'prop-types';
 
 class QuestionDetails extends PureComponent {
   state = {
@@ -82,6 +83,14 @@ class QuestionDetails extends PureComponent {
     );
   }
 }
+
+QuestionDetails.propTypes = {
+  question: PropTypes.object,
+  questionAuthor: PropTypes.object,
+  answer: PropTypes.string.isRequired,
+  percOne: PropTypes.number.isRequired,
+  percTwo: PropTypes.number.isRequired
+};
 
 function mapStateToProps ({ questions, users, authedUser }, { match }) {
   const answers = users[authedUser].answers;

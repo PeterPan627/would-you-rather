@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import { connect } from "react-redux"
 import { Table } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 function Leaderboard(props) {
   const { users } = props;
@@ -31,6 +32,10 @@ function Leaderboard(props) {
     </Fragment>
   )
 }
+
+Leaderboard.propTypes = {
+  users: PropTypes.array.isRequired
+};
 
 const mapStateToProps = ({ users }) => {
   const userScore = user =>

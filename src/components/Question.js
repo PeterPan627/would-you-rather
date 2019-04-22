@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import {  withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Question extends React.Component {
   constuctor() {
@@ -26,6 +27,11 @@ class Question extends React.Component {
     );
   }
 }
+
+Question.propTypes = {
+  question: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 function mapStateToProps (state, { id }) {
   return {
