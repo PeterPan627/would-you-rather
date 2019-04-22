@@ -39,13 +39,13 @@ class QuestionDetails extends PureComponent {
                   <FormGroup>
                     <FormGroup check disabled>
                       <Label check>
-                        <Input type="radio" checked={answer==="optionOne"} />{' '}
+                        <Input type="radio" checked={answer==="optionOne"} readOnly/>{' '}
                         {question.optionOne.text}
                       </Label>
                     </FormGroup>
                     <FormGroup check disabled>
                       <Label check>
-                        <Input type="radio" checked={answer==="optionTwo"} />{' '}
+                        <Input type="radio" checked={answer==="optionTwo"} readOnly/>{' '}
                         {question.optionTwo.text}
                       </Label>
                     </FormGroup>
@@ -87,10 +87,14 @@ class QuestionDetails extends PureComponent {
 QuestionDetails.propTypes = {
   question: PropTypes.object,
   questionAuthor: PropTypes.object,
-  answer: PropTypes.string.isRequired,
-  percOne: PropTypes.number.isRequired,
-  percTwo: PropTypes.number.isRequired
+  answer: PropTypes.string,
+  percOne: PropTypes.string.isRequired,
+  percTwo: PropTypes.string.isRequired
 };
+
+function financial(x) {
+  return Number.parseFloat(x).toFixed(2);
+}
 
 function mapStateToProps ({ questions, users, authedUser }, { match }) {
   const answers = users[authedUser].answers;
@@ -102,8 +106,8 @@ function mapStateToProps ({ questions, users, authedUser }, { match }) {
   }
   const questionAuthor = users[question.author];
   total = question.optionOne.votes.length + question.optionTwo.votes.length;
-  percOne = (question.optionOne.votes.length / total) * 100;
-  percTwo = (question.optionTwo.votes.length / total) * 100;
+  percOne = financial((question.optionOne.votes.length / total) * 100);
+  percTwo = financial((question.optionTwo.votes.length / total) * 100);
   return {
     question,
     questionAuthor,

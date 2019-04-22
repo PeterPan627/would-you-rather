@@ -67,8 +67,8 @@ class DashBoard extends PureComponent {
 }
 
 DashBoard.propTypes = {
-  answeredPolls : PropTypes.array.isRequired,
-  unansweredPolls : PropTypes.array.isRequired
+  answeredPolls : PropTypes.array,
+  unansweredPolls : PropTypes.array
 };
 
 function mapStateToProps ({ questions, users, authedUser }) {

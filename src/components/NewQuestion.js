@@ -83,7 +83,7 @@ class NewQuestion extends Component {
 }
 
 NewQuestion.propTypes = {
-  authedUser: PropTypes.string.isRequired,
+  authedUser: PropTypes.string,
   addQuestion: PropTypes.func.isRequired,
 };
 

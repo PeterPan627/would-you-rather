@@ -46,3 +46,8 @@ div.card {
   text-align: center;
   font-size: 20px;
 }
+
+.optionSelected {
+  font-weight: bold;
+  color: blueviolet;
+}
