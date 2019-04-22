@@ -5,8 +5,6 @@ import {unsetAuthedUser} from "../actions/authedUser";
 import {connect} from "react-redux";
 import React, { PureComponent, Fragment } from "react";
 import User from "./User";
-import { Redirect } from 'react-router-dom'
-import Login from "./Login";
 
 class NavBar extends PureComponent {
   state = {
@@ -31,9 +29,9 @@ class NavBar extends PureComponent {
       <div>
         <Navbar bg="primary" variant="dark" light expand="md">
           <NavbarBrand tag={Link} to="/">Would You Rather</NavbarBrand>
-          { authedUser ?
+          {authedUser &&
           <Fragment>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
@@ -50,7 +48,7 @@ class NavBar extends PureComponent {
                 </NavItem>
               </Nav>
             </Collapse>
-          </Fragment> :  <Redirect to='/' exact component={Login}/>
+          </Fragment>
           }
         </Navbar>
       </div>

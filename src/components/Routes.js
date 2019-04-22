@@ -7,6 +7,7 @@ import LeaderBoard from './LeaderBoard'
 import Login from "./Login";
 import NewQuestion from "./NewQuestion";
 import QuestionDetails from "./QuestionDetails"
+import NotFound from "./NotFound"
 
 function Routes(props) {
   return <div className="container">
@@ -20,6 +21,7 @@ function Routes(props) {
             <Route path="/questions/:id" component={QuestionDetails} />
           </Fragment>
       }
+      <Route component={NotFound} />
     </Switch>
   </div>;
 }
