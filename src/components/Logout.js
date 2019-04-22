@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { logoutUser } from '../actions/auth'
+import { unsetAuthedUser } from '../actions/authedUser'
 
 class Logout extends Component {
   componentWillMount () {
-    this.props.dispatch(logoutUser())
+    this.props.dispatch(unsetAuthedUser())
   }
   render () {
     return <Redirect to='/' />

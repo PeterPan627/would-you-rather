@@ -8,6 +8,7 @@ import Login from "./Login";
 import NewQuestion from "./NewQuestion";
 import QuestionDetails from "./QuestionDetails"
 import NotFound from "./NotFound"
+import Logout from './Logout'
 
 function Routes(props) {
   return <div className="container">
@@ -19,6 +20,7 @@ function Routes(props) {
             <Route path='/leaderboard' exact component={LeaderBoard} />
             <Route path='/add' component={NewQuestion}/>
             <Route path="/questions/:id" component={QuestionDetails} />
+            <Route exact path='/logout' component={Logout} />
           </Fragment>
       }
       <Route component={NotFound} />
