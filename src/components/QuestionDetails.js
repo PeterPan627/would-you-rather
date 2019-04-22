@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Card, CardHeader,CardBody, CardTitle, FormGroup, Label, Input, Form, Button, Row, Col} from 'reactstrap';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import User from './User';
 import { handleAnswer } from '../actions/shared';
 
 class QuestionDetails extends PureComponent {
   state = {
-    selectedOption: '',
-    redirect: false
+    selectedOption: ''
   };
 
   radioSelected = (e) => {
@@ -20,15 +18,11 @@ class QuestionDetails extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.saveQuestionAnswer(this.state.selectedOption);
-    this.setState({redirect: true})
   };
 
   render() {
     const { question, questionAuthor, answer, total, percOne, percTwo} = this.props;
-    const { selectedOption, redirect } = this.state;
-    if (redirect) {
-        return <Redirect to='/' />
-        }
+    const { selectedOption } = this.state;
 
     return (
       <Row>
